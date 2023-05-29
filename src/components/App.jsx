@@ -1,18 +1,14 @@
 import { Route, Routes } from 'react-router-dom';
 import { lazy } from 'react';
 
-// import Home from './pages/Home';
-// import Movies from './pages/Movies';
-// import MovieDetails from './pages/MovieDetails';
-// import Cast from './Cast';
-// import Reviews from './Reviews';
 import Layout from './Layout/Layout';
+import ErrorPage from './pages/ErrorPage/ErrorPage';
 
-const Home = lazy(() => import('./pages/Home'));
-const Movies = lazy(() => import('./pages/Movies'));
-const MovieDetails = lazy(() => import('./pages/MovieDetails'));
-const Cast = lazy(() => import('./Cast'));
-const Reviews = lazy(() => import('./Reviews'));
+const Home = lazy(() => import('./pages/Home/Home'));
+const Movies = lazy(() => import('./pages/Movies/Movies'));
+const MovieDetails = lazy(() => import('./pages/MovieDetalis/MovieDetails'));
+const Cast = lazy(() => import('./Cast/Cast'));
+const Reviews = lazy(() => import('./Reviews/Reviews'));
 
 export const App = () => {
   return (
@@ -26,6 +22,7 @@ export const App = () => {
             <Route path="reviews" element={<Reviews />} />
           </Route>
         </Route>
+        <Route path="*" element={<ErrorPage />}></Route>
       </Routes>
     </>
   );

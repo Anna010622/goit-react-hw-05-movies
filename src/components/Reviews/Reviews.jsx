@@ -1,6 +1,7 @@
 import getMovieReviews from 'api/get-movie-reviews';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { ReviewsItem, ReviewsList } from './Reviews.styled';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -15,16 +16,16 @@ const Reviews = () => {
   }, [movieId]);
 
   return reviews.length !== 0 ? (
-    <ul>
+    <ReviewsList>
       {reviews.map(review => (
-        <li key={review.author}>
+        <ReviewsItem key={review.id}>
           <h3>{`Author: ${review.author}`}</h3>
           <p>{review.content}</p>
-        </li>
+        </ReviewsItem>
       ))}
-    </ul>
+    </ReviewsList>
   ) : (
-    `We don't have any reviews for this movie`
+    <p>We don't have any reviews for this movie</p>
   );
 };
 

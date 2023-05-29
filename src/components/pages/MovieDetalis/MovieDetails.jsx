@@ -1,14 +1,23 @@
 import getMovieDetails from 'api/get-movie-details';
 import { Suspense, useEffect, useRef, useState } from 'react';
-import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
+import {
+  DetailsWrapper,
+  ImageWrapper,
+  Image,
+  Details,
+  Button,
+  InformationLink,
+  InformationTitle,
+  InformationList,
+} from './MovieDetails.styled';
+import { Loader } from 'components/Loader/Loader';
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
   const location = useLocation();
   const backLink = useRef(location.state ?? '/');
-  console.log('location in details', location);
-  console.log('backLink', backLink);
 
   useEffect(() => {
     const getDetails = async () => {
@@ -20,10 +29,11 @@ const MovieDetails = () => {
 
   return (
     <div>
-      <Link to={backLink.current}>Go back</Link>
-      <div>
-        <div>
-          <img
+      <Button to={backLink.current}>Go back</Button>
+
+      <DetailsWrapper>
+        <ImageWrapper>
+          <Image
             src={
               movie?.poster_path &&
               `https://image.tmdb.org/t/p/w500${movie.poster_path}`
@@ -31,35 +41,45 @@ const MovieDetails = () => {
             alt="movie poster"
             width={250}
           />
-        </div>
-        <div>
+        </ImageWrapper>
+        <Details>
           <h1>{movie?.title}</h1>
           <p>User Score: {Math.round(movie?.vote_average * 10)}%</p>
           <h2>Overview</h2>
-          <p>{movie?.overview}</p>
+          {movie?.overview !== '' ? (
+            <p>{movie?.overview}</p>
+          ) : (
+            <p>There is no overview</p>
+          )}
+
           <h2>Genres</h2>
-          {/* <p>{movie?.genres.map(genre => genre.name).join(', ')}</p> */}
-          <ul>
+          {movie?.genres.length > 0 ? (
+            <p>{movie?.genres.map(genre => genre.name).join(' / ')}</p>
+          ) : (
+            <p>Sorry, there is no information about genres</p>
+          )}
+
+          {/* <ul>
             {movie?.genres.map(genre => (
               <li key={genre.id}>
                 <p>{genre.name}</p>
               </li>
             ))}
-          </ul>
-        </div>
-      </div>
+          </ul> */}
+        </Details>
+      </DetailsWrapper>
       <div>
-        <p>Additional information</p>
-        <ul>
+        <InformationTitle>Additional information</InformationTitle>
+        <InformationList>
           <li>
-            <Link to="cast">Cast</Link>
+            <InformationLink to="cast">Cast</InformationLink>
           </li>
           <li>
-            <Link to="reviews">Reviews</Link>
+            <InformationLink to="reviews">Reviews</InformationLink>
           </li>
-        </ul>
+        </InformationList>
       </div>
-      <Suspense fallback={<div>loading..</div>}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </div>
