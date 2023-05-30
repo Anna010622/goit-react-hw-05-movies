@@ -4,8 +4,8 @@ import { useSearchParams } from 'react-router-dom';
 import searchMovies from 'api/search-movies';
 import MovieList from 'components/MovieList/MovieList';
 import PaginationRanges from 'components/Pagination/Pagination';
-import { Icon, Input, InputWrapper } from './Movies.styled';
-import { toast } from 'react-toastify';
+import { Icon, Input, InputWrapper, MoviesWrapper } from './Movies.styled';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -42,7 +42,7 @@ const Movies = () => {
     });
   };
   return (
-    <div>
+    <MoviesWrapper>
       <InputWrapper>
         <Input
           minLength={2}
@@ -62,7 +62,9 @@ const Movies = () => {
           page={Number(searchParams.get('page'))}
         />
       )}
-    </div>
+
+      <ToastContainer />
+    </MoviesWrapper>
   );
 };
 

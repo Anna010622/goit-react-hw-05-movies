@@ -1,6 +1,10 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
+export const MovieDetailsContainer = styled.div`
+  padding: 20px;
+`;
+
 export const DetailsWrapper = styled.div`
   display: flex;
   gap: 15px;
@@ -12,7 +16,6 @@ export const DetailsWrapper = styled.div`
 `;
 
 export const ImageWrapper = styled.div`
-  flex-grow: 1;
   min-width: 255px;
   height: 356px;
   border-radius: 5px;
@@ -31,6 +34,7 @@ export const Image = styled.img`
 `;
 
 export const Details = styled.div`
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -39,13 +43,20 @@ export const Details = styled.div`
 export const Button = styled(Link)`
   display: inline-block;
   margin-bottom: 15px;
-  padding: 5px;
+  padding: 7px;
   border-radius: 5px;
+  font-weight: 600;
   background: linear-gradient(
     0deg,
     rgba(34, 195, 58, 1) 0%,
     rgba(253, 187, 45, 1) 100%
   );
+  transition: color 250ms linear;
+
+  &:hover,
+  &:focus {
+    color: white;
+  }
 `;
 
 export const InformationTitle = styled.h2`
@@ -56,14 +67,16 @@ export const InformationList = styled.ul`
   display: flex;
   gap: 15px;
   margin-bottom: 15px;
+  font-weight: 600;
 `;
 export const InformationLink = styled(Link)`
   color: #22c33a;
   text-decoration: underline;
   text-underline-offset: 3px;
+  transition: color 250ms linear;
 
   &:hover,
   &:focus {
-    color: rgba(253, 187, 45, 1);
+    color: #148f26;
   }
 `;

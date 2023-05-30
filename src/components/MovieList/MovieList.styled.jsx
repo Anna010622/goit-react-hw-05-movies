@@ -12,12 +12,12 @@ export const Item = styled.li`
 `;
 
 export const MovieLink = styled(Link)`
-  display: block;
+  display: inline-block;
   transition: font-size 250ms linear, color 250ms linear;
 
   &:hover,
   &:focus {
     color: #22c33a;
-    font-size: 18px;
+    /* font-size: 18px; */
   }
 `;

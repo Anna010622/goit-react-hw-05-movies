@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import getMovieCredits from 'api/get-movie-credits';
-import { CastList, Image, Item } from './Cast.styled';
+import { CastList, Image, Info, Item } from './Cast.styled';
 import defaultImg from '../../images/default-img.jpg';
 
 const Cast = () => {
-  const [cast, setCast] = useState(null);
+  const [cast, setCast] = useState([]);
   const { movieId } = useParams();
 
   useEffect(() => {
@@ -16,9 +16,9 @@ const Cast = () => {
     getCredits();
   }, [movieId]);
 
-  return (
+  return cast.length > 0 ? (
     <CastList>
-      {cast?.map(actor => (
+      {cast.map(actor => (
         <Item key={actor.id}>
           <Image
             src={
@@ -28,11 +28,15 @@ const Cast = () => {
             }
             alt={actor.name}
           />
-          <h3>{actor.name}</h3>
-          <p>{actor.character}</p>
+          <Info>
+            <h3>{actor.name}</h3>
+            <p>{actor.character}</p>
+          </Info>
         </Item>
       ))}
     </CastList>
+  ) : (
+    <p>Sorry, there is no information about cast</p>
   );
 };
 

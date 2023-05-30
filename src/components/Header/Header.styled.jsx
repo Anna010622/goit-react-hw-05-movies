@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
 
 export const HeaderWrapper = styled.div`
-  margin-bottom: 25px;
   padding: 20px;
   font-weight: 600;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,

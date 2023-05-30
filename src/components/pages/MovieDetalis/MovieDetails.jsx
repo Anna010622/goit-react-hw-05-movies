@@ -2,6 +2,7 @@ import getMovieDetails from 'api/get-movie-details';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
 import {
+  MovieDetailsContainer,
   DetailsWrapper,
   ImageWrapper,
   Image,
@@ -12,6 +13,7 @@ import {
   InformationList,
 } from './MovieDetails.styled';
 import { Loader } from 'components/Loader/Loader';
+import defaultMovieImg from '../../../images/default-movie-img.jpg';
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
@@ -28,18 +30,19 @@ const MovieDetails = () => {
   }, [movieId]);
 
   return (
-    <div>
+    <MovieDetailsContainer>
       <Button to={backLink.current}>Go back</Button>
 
       <DetailsWrapper>
         <ImageWrapper>
           <Image
             src={
-              movie?.poster_path &&
-              `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+              movie?.poster_path
+                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                : defaultMovieImg
             }
             alt="movie poster"
-            width={250}
+            width={255}
           />
         </ImageWrapper>
         <Details>
@@ -82,7 +85,7 @@ const MovieDetails = () => {
       <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
-    </div>
+    </MovieDetailsContainer>
   );
 };
 

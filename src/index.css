@@ -39,8 +39,11 @@ html {
 *::after {
   box-sizing: inherit;
 }
+
 body {
+  height: 100vh;
   margin: 0;
   font-family: 'DM Sans', sans-serif;
   color: #111111;
+  background-color: #fdbb2d5e;
 }

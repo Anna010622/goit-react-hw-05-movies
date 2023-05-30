@@ -2,7 +2,7 @@ import getTrending from 'api/get-trending';
 import { useEffect, useState } from 'react';
 
 import MovieList from 'components/MovieList/MovieList';
-import { Title } from './Home.styled';
+import { HomeWrapper, Title } from './Home.styled';
 import PaginationRanges from 'components/Pagination/Pagination';
 import { useSearchParams } from 'react-router-dom';
 
@@ -27,7 +27,7 @@ const Home = () => {
     });
   };
   return (
-    <>
+    <HomeWrapper>
       <Title>Trending today</Title>
       <MovieList movies={movies} />
 
@@ -38,7 +38,7 @@ const Home = () => {
           page={Number(searchParams.get('page'))}
         />
       )}
-    </>
+    </HomeWrapper>
   );
 };
 

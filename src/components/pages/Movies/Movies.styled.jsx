@@ -3,6 +3,10 @@ import { BiSearch } from 'react-icons/bi';
 
 import styled from 'styled-components';
 
+export const MoviesWrapper = styled.div`
+  padding: 20px;
+`;
+
 export const InputWrapper = styled.label`
   position: relative;
 `;
@@ -14,6 +18,10 @@ export const Input = styled(DebounceInput)`
   border: 2px solid #22c33a;
   border-radius: 5px;
   font-size: 20px;
+  background-color: transparent;
+  &:focus {
+    outline: 3px solid #22c33a;
+  }
 `;
 
 export const Icon = styled(BiSearch)`
